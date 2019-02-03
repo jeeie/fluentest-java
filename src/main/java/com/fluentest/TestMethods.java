@@ -65,6 +65,13 @@ public class TestMethods {
         return new RetryTestAction(getMethodEntryPoint(), retryTimes, expireTime, testActions);
     }
 
+    public static ITestAction timeout(int timeoutInMilliSeconds, ITestAction testAction, ITestAction... extraTestActions) {
+        List<ITestAction> testActions = new ArrayList<>();
+        testActions.add(testAction);
+        if (extraTestActions.length > 0) testActions.addAll(Arrays.asList(extraTestActions));
+        return new TimeoutTestAction(getMethodEntryPoint(), timeoutInMilliSeconds, testActions);
+    }
+
     public static ITestAction when(boolean testResult, ITestAction testAction, ITestAction... extraTestActions) {
         List<ITestAction> testActions = new ArrayList<>();
         testActions.add(testAction);
