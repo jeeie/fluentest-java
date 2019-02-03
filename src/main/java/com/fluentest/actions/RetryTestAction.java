@@ -93,7 +93,7 @@ public class RetryTestAction implements ITestAction, ITest {
 
     public RetryTestAction(String testEntryPoint, int retryTimes, Instant expireTime, List<ITestAction> testActions) {
         if (retryTimes < 1 && expireTime == null) {
-            throw new TestFailureException("retry times could not be less than 1 if expire time not specified");
+            TestFailureException.raiseException("retry times could not be less than 1 if expire time not specified");
         }
         this.testEntryPoint = testEntryPoint;
         this.testActions = testActions;
