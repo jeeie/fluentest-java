@@ -96,7 +96,8 @@ public class TestMethods {
         for (int i = 0; i < elements.length; i++) {
             StackTraceElement element = elements[i];
             if (element.getMethodName().equals("getMethodEntryPoint")) {
-                return elements[i + 2].getClassName() + ":" + elements[i + 2].getLineNumber();
+                String[] className = elements[i + 2].getClassName().split("\\.");
+                return className[className.length - 1] + ":" + elements[i + 2].getLineNumber();
             }
         }
         return "NoDef";

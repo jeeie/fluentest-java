@@ -41,7 +41,7 @@ public class TestRetryActionWithExpireTime {
                     )
             );
         } catch (Throwable e) {
-            Assert.assertEquals(i.get(), 4);
+            Assert.assertEquals(i.get(), 3);
             throw e;
         }
     }
@@ -80,7 +80,7 @@ public class TestRetryActionWithExpireTime {
                     )
             );
         } catch (Throwable e) {
-            Assert.assertEquals(i.get(), 4);
+            Assert.assertEquals(i.get(), 3);
             throw e;
         }
     }

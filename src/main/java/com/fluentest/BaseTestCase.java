@@ -42,6 +42,15 @@ public abstract class BaseTestCase extends TestMethods {
     }
 
     protected void printTestSummary() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Test Summary: \n");
+        for (TestStepExecutor stepExecutor : TestStepExecutionManager.getInstance().getTestStepExecutors()) {
+            sb.append(String.format("Step: %s (%s) - %s \n",
+                    stepExecutor.getTestStep().getDescription(),
+                    stepExecutor.getStatus().toString(),
+                    stepExecutor.getTestStep().getEntryPoint()));
+        }
+        Logger.info(sb.toString());
     }
 
     protected void cleanTest() {

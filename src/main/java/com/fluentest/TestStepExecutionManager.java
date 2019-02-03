@@ -19,7 +19,7 @@ public class TestStepExecutionManager {
         testSteps.add(testStepExecutor);
     }
 
-    public TestStepExecutor[] getTestStepExecutor() {
+    public TestStepExecutor[] getTestStepExecutors() {
         return testSteps.toArray(new TestStepExecutor[]{});
     }
 

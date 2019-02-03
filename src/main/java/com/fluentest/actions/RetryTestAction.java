@@ -17,6 +17,7 @@ public class RetryTestAction implements ITestAction, ITest {
     private final String testEntryPoint;
     private final Thread expireCheckThread;
 
+    private int retryIntervalMilliSeconds = 250;
     private boolean retryActionFinished = false;
     private boolean retryActionExpired = false;
 
@@ -66,7 +67,7 @@ public class RetryTestAction implements ITestAction, ITest {
 
                         }
                     }
-                    Logger.info("the retry action [%s] is failed for %d time(s), retrying...", testEntryPoint, i);
+                    Logger.info("the retry action [%s] is failed for %d time(s), retrying after %d ms...", testEntryPoint, i, retryIntervalMilliSeconds);
                 } else {
                     if (cause != null) {
                         Logger.info("the retry action [%s] is failed for %d time(s)", testEntryPoint, i);
@@ -76,8 +77,8 @@ public class RetryTestAction implements ITestAction, ITest {
                         TestFailureException.raiseException(String.format("the retry action [%s] is failed for %d time(s)", testEntryPoint, i));
                     }
                     break;
-
                 }
+                TestMethods.sleep(retryIntervalMilliSeconds);
             }
         } finally {
             retryActionFinished = true;
