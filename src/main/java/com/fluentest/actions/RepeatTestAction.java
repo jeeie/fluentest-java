@@ -31,8 +31,8 @@ public class RepeatTestAction implements ITestAction, ITest {
     public void run(ITestContext testContext) {
         IntStream.range(0, repeatTimes).<Consumer<? super ITestAction>>mapToObj(i -> action -> {
             TestActionExecutor executor = new TestActionExecutor(action);
-            executor.getTestContext().setRepeatTimes(repeatTimes);
-            executor.getTestContext().setNumberOfRepeats(i + 1);
+//            executor.getTestContext().setRepeatTimes(repeatTimes);
+//            executor.getTestContext().setNumberOfRepeats(i + 1);
             executor.start();
             executor.join();
             Throwable cause = executor.getException();

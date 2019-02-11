@@ -1,15 +1,15 @@
 package com.fluentest;
 
-public interface ITestContext<T> {
+public interface ITestContext {
 
-    void logI(String... message);
+    void logI(String message, Object... args);
 
-    void logE(String... message);
+    void logE(String message, Object... args);
 
-    void logW(String... message);
+    void logW(String message, Object... args);
 
-    int getRepeatTimes();
+    void put(String key, Object value);
 
-    int getNumberOfRepeats();
+    <T>T get(String key);
 
 }

@@ -79,9 +79,24 @@ public class TestMethods {
         return new WhenTestAction(getMethodEntryPoint(), testResult, testActions);
     }
 
-    public static void sleep(int milliSeconds) {
+    public static ITestAction delay(long milliSeconds, ITestAction testAction, ITestAction... extraTestActions) {
+        List<ITestAction> testActions = new ArrayList<>();
+        testActions.add(testAction);
+        if (extraTestActions.length > 0) testActions.addAll(Arrays.asList(extraTestActions));
+        return new DelayTestAction(getMethodEntryPoint(), milliSeconds, testActions);
+    }
+
+    public static void sleep(long milliSeconds) {
+        long startTimestamp = System.currentTimeMillis();
         try {
-            Thread.sleep(milliSeconds);
+            long leftMillis = milliSeconds;
+            while (true) {
+                Thread.sleep(leftMillis);
+                leftMillis = milliSeconds - (System.currentTimeMillis() - startTimestamp);
+                if (leftMillis <= 0) {
+                    break;
+                }
+            }
         } catch (InterruptedException e) {
             Thread.interrupted();
         }

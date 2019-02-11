@@ -1,41 +1,51 @@
 package com.fluentest;
 
-public class TestContext<T> implements ITestContext<T> {
+import com.fluentest.util.Logger;
 
-    private int repeatTimes = 1;
-    private int numberOfRepeats = 1;
+import java.util.Hashtable;
+import java.util.Map;
 
-    @Override
-    public void logI(String... message) {
+public class TestContext implements ITestContext {
 
-    }
-
-    @Override
-    public void logE(String... message) {
-
-    }
+    private final Map<String, Object> attributes = new Hashtable<>();
 
     @Override
-    public void logW(String... message) {
-
+    public void logI(String message, Object... args) {
+        Logger.info(getInvokerClass(), message, args);
     }
 
     @Override
-    public int getRepeatTimes() {
-        return repeatTimes;
-    }
-
-    public void setRepeatTimes(int repeatTimes) {
-        this.repeatTimes = repeatTimes;
+    public void logE(String message, Object... args) {
+        Logger.error(getInvokerClass(), message, args);
     }
 
     @Override
-    public int getNumberOfRepeats() {
-        return numberOfRepeats;
+    public void logW(String message, Object... args) {
+        Logger.warn(getInvokerClass(), message, args);
     }
 
-    public void setNumberOfRepeats(int n) {
-        this.numberOfRepeats = n;
+    @Override
+    public void put(String key, Object value) {
+        this.attributes.put(key, value);
+    }
+
+    @Override
+    public <T> T get(String key) {
+        return (T) this.attributes.get(key);
+    }
+
+    private static Class<?> getInvokerClass() {
+        Class clazz = Logger.class;
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        if (elements.length > 4) {
+            String className = elements[3].getClassName();
+            try {
+                clazz = Class.forName(className);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return clazz;
     }
 
 }
