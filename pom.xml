@@ -6,7 +6,7 @@
 
     <groupId>com.fluentest</groupId>
     <artifactId>fluentest-java</artifactId>
-    <version>0.0.1-ALPHA</version>
+    <version>0.0.1-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
@@ -44,4 +44,34 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <!-- override the parent's directory to point to the canonical place, and use https. -->
+        <repository>
+            <id>fluentest-releases</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>fluentest-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://mit-license.org/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/jeeie/fluentest-java</url>
+        <connection>https://github.com/jeeie/fluentest-java.git</connection>
+        <developerConnection>https://github.com/jeeie/fluentest-java</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>Jiang Ying</name>
+            <email>jyxp@msn.com</email>
+            <url>https://github.com/jeeie/fluentest-java</url>
+        </developer>
+    </developers>
 </project>
